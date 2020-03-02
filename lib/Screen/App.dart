@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tiburon_mobile/Context/AppContext.dart';
 import 'package:tiburon_mobile/Components/Customers.dart';
-import 'package:tiburon_mobile/Screen/LoadingScreen.dart';
 
 class App extends StatefulWidget {
   App({Key key, this.title}) : super(key: key);
@@ -50,4 +49,3 @@ class _AppState extends State<App> {
     return body(appContext);
   }
 }
-

@@ -167,9 +167,10 @@ class AppContext with ChangeNotifier {
     client.options.responseType = ResponseType.plain;
     Response response;
     try {
-      response = await client.post(_serverIP + '/sales/debt', data: {'customer_id': customer.customer_id});
-      print(response.data);
-      return 'hola';
+      response = await client.post(_serverIP + '/customers/customerdebt', data: {'customer_id': customer.customer_id});
+      Map debtMap = json.decode(response.data);
+      String debt = debtMap['debt'].toString();
+      return debt;
     } on TimeoutException {
       print('error de conexión');
       return 'adios';

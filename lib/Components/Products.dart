@@ -120,7 +120,7 @@ class _ProductsState extends State<Products> with TickerProviderStateMixin {
         ),
         elevation: 0,
       ),
-      body: appContext.products == 0 ? 
+      body: appContext.products.length == 0 ? 
         Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

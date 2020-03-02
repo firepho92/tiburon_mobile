@@ -4,17 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:tiburon_mobile/Components/DepositsForm.dart';
 import 'package:tiburon_mobile/Components/Products.dart';
 import 'package:tiburon_mobile/Context/AppContext.dart';
-import 'package:tiburon_mobile/Models/Customer.dart';
-//import 'package:tiburon_mobile/Components/DepositsForm.dart';
-//import 'package:tiburon_mobile/Components/Products.dart';
-import 'package:tiburon_mobile/Models/Movement.dart';
-import 'package:tiburon_mobile/Models/Deposit.dart';
 
 class CustomerScreen extends StatefulWidget {
-  //CustomerScreen({Key key, this.customer}) : super(key: key);
-  CustomerScreen({Key key}) : super(key: key){
-    //this.customer = null;
-  }
+  CustomerScreen({Key key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -30,20 +22,6 @@ class CustomerScreen extends StatefulWidget {
 }
 
 class _CustomerScreenState extends State<CustomerScreen> {
-
-  double _currentDebt(List<Movement> movements, List<Deposit> deposits, customer) {
-    List<Movement> _movements = movements.where((movement) => movement.customer == customer.customer_id).toList();
-    List<Deposit> _deposits = deposits.where((deposit) => deposit.customer == customer.customer_id).toList();
-    var movementsTotal = 0;
-    var depositsTotal = 0;
-
-    for(int i = 0; i < _movements.length; i++)
-      movementsTotal += _movements[i].selling_price * _movements[i].ammount;
-    for(int i = 0; i < _deposits.length; i++)
-      depositsTotal += _deposits[i].ammount;
-    var debt = movementsTotal - depositsTotal;
-    return debt.toDouble();
-  }
   
   @override
   Widget build(BuildContext context) {
@@ -87,9 +65,9 @@ class _CustomerScreenState extends State<CustomerScreen> {
                       future: appContext.fetchDebt(),
                       builder: (context, snapshot) {
                         if(snapshot.hasData) {
-                          return Text(snapshot.data);
+                          return Text('Saldo pendiente: \$' + snapshot.data, style: TextStyle(fontSize: 18),);
                         } else {
-                          return CircularProgressIndicator();
+                          return Text('Cargando...');
                         }
                       },
                     )
@@ -116,6 +94,18 @@ class _CustomerScreenState extends State<CustomerScreen> {
                 )
               )
             ),
+            /*Padding(
+              padding: EdgeInsets.all(5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ListView(
+
+                  )
+                ],
+              ),
+            )*/
           ],
         ),
       ),

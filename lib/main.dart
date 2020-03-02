@@ -80,7 +80,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   Future<bool> isLogged() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String personal_name = prefs.getString('personal_name');
-    int personal_id = prefs.getInt('personal_id');
     if(personal_name != '' && personal_name != null) {
       return true;
     }
